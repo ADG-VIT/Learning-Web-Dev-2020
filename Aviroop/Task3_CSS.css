@@ -1,0 +1,84 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: cursive;
+}
+
+#header {
+    background-color: #cb202d;
+    color: honeydew;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    width: 100vw;
+    height: 10vh;
+}
+
+#header h1 {
+    padding-left: 70px;
+}
+
+.splitPage {
+    margin-top: 10vh;
+    height: 100vh;
+    width: 50vw;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+}
+
+#menu {
+    left: 0px;
+    background-color: rgba(0, 0, 0, 1.0);
+}
+
+#menu h1 {
+    color: seashell;
+    padding-left: 2vw;
+    margin-bottom: 15px;
+}
+
+#menu button {
+    margin-left: 2vw;
+    width: 200px;
+    height: 170px;
+    padding: 1px;
+    text-align: center;
+    font-size: large;
+    background-color: #cb202d;
+    color: seashell;
+    margin-bottom: 5px;
+}
+
+#bill {
+    background-color: skyblue;
+    right: 0px;
+}
+
+#finalBill {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.25em;
+    font-weight: 500;
+}
+
+@media (min-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    span {
+        font-size: 1.25rem;
+    }
+}
+
+@media (min-width: 800px) {
+    h1 {
+        font-size: 2rem;
+    }
+    span {
+        font-size: 1.5rem;
+    }
+}
