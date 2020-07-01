@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <title>ADG Task 2</title>
+    <link rel = "stylesheet" href = "Task2_CSS.css">
+</head>
+<body>
+    <div id="container">
+        <div id="start">START QUIZ</div>
+        <div id="quiz" style = "display: none;">
+            <div id="image"></div>
+            <div id="question"></div>
+            <div id="options">
+                <div class="option" id = "A" onclick = "checkAnswer('A')"></div>
+                <div class="option" id = "B" onclick = "checkAnswer('B')"></div>
+                <div class="option" id = "C" onclick = "checkAnswer('C')"></div>
+                <div class="option" id = "D" onclick = "checkAnswer('D')"></div>
+            </div>
+            <div id="timer">
+                <div id="counter"></div>
+                <div id="backgroundTimeGauge"></div>
+                <div id="timeGauge"></div>
+            </div>
+            <div id="progress"></div>
+        </div>
+        <div id="scoreContainer" style = "display: none;"></div>
+    </div>
+    <div>
+        <form>
+            <button id = "resetButton1">End Quiz</button>
+        </form>
+        <form action = "C:\Users\Nandi\Documents\ADG_WEB_DEV\Task2_Form.html">
+            <button id = "resetButton2">Back to Form Page</button>
+        </form>
+    </div>
+    <script src = "Task2_JS.js"></script>
+</body>
+</html>
