@@ -2,12 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Hello</title>
+	<title>WikiFlix</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+
 
 </head>
 <style type="text/css">
@@ -25,7 +27,11 @@
 	<div class="container-fluid row my-4 p-0 m-0">
 		
 		<div class="container col-12 text-center form-group m-0">
-			<input type="text" name="query" id="query" class="col-12 form-control" placeholder="Enter series name">	
+			<input type="text" name="query" id="query" class="col-12 form-control" placeholder="Search" list="datalist">
+			<!-- On keyup calls the function everytime a key is released -->
+			<datalist id="datalist" class="col-12"> 
+			 
+			</datalist> 	
 					
 
 		<button class="btn btn-danger m-4" onclick="search()">
@@ -72,11 +78,13 @@
 			</div>
 		</div>
 	</div>
-	
+
 </body>
 
 	
 <script type="text/javascript">
+
+	
 	
 	document.getElementById('info').style.display = 'none';
 
@@ -91,23 +99,25 @@
 				url : 'https://task4-api.herokuapp.com?',
 				method : 'get',
 				success(response){
+					// console.log(response)
 					document.getElementById('spin').style.display = 'none';
 					document.getElementById('search').style.display = 'block';
 					if(response){
-						console.log(response.data.tv_shows.length)
+						// console.log(response.data.tv_shows.length)
 						series = response.data.tv_shows
 
 						query  = document.getElementById('query').value;
-						query = query.toLowerCase().split(' ').join('-')
-						console.log(query)
+						Query = query
+						query = query.toLowerCase().split(' ').join('-').replace()
+						// console.log(query)
 
 						for(var i=0; i< series.length; i+=1){
-							if(series[i].permalink ==  query){
+							if(series[i].permalink ==  query || Query == series[i].name){
 								document.getElementById('message').innerHTML = ''
 								
 								document.getElementById('info').style.display = 'block';
-								console.log("info")
-								console.log(series[i])
+								// console.log("info")
+								// console.log(series[i])
 								document.getElementById('name').innerHTML = series[i].name;
 								document.getElementById('date').innerHTML = series[i].start_date;
 								document.getElementById('country').innerHTML = series[i].country;
@@ -125,7 +135,7 @@
 						}
 					}
 					else {
-						console.log('Some Error Occured')
+						// console.log('Some Error Occured')
 						document.getElementById('message').innerHTML = 'Some Error Occured'
 					}
 
@@ -137,9 +147,34 @@
 
 	}
 
+
+
+	///AUTO SUGEGSTION SCRIPT
+	$( function() { 
+    var tags = []; 
+
+	$.ajax({
+				url : 'https://task4-api.herokuapp.com?',
+				method : 'get',
+				success(response){
+					if(response){
+						series = response.data.tv_shows
+						for(var i=0; i< series.length; i+=1){
+							tags.push(series[i].name)
+							document.getElementById('datalist').innerHTML += `<option class="col-12" value="${series[i].name}"></option>
+							`
+						}
+					}
+					
+				}
+			}
+		)
+
+	// console.log(tags)
+
+  } ); 
+
 	</script>
 
-	<script type="text/javascript">
-		
-	</script>
+
 </html>
