@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<style type="text/css">
+	*{
+		/*border: 1px dashed green;*/
+	}
+</style>
+<body class="bg-dark p-0">
+
+	<div class="display-1 text-center text-white">
+		Wiki<span class="text-danger">Flix</span>
+	</div>
+
+	
+	<div class="container-fluid row my-4 p-0 m-0">
+		
+		<div class="container col-12 text-center form-group m-0">
+			<input type="text" name="query" id="query" class="col-12 form-control" placeholder="Enter series name">	
+					
+
+		<button class="btn btn-danger m-4" onclick="search()">
+			<div id='spin' style="display: none;">
+				 <span class="spinner-border spinner-border-sm"  ></span> Loading		
+			</div>
+
+			<div id='search'>
+				Search
+			</div>
+		 
+		  
+		</button>
+
+		</div>
+		
+	</div>
+	<div class="container-fluid m-0">
+		<h1 id='message'> </h1>
+		
+		<div id='info' >
+			<div class="container-fluid row m-0 text-white" >
+
+
+				<div class="container col-md-6 d-md-none d-block thumbnail text-center">
+					<img src="" id='thumb_mobile' alt='img' height="250px">
+
+				</div>
+
+				<div class="container col-md-6 font-weight-bold text-danger text-md-right text-center">
+				  	<h2  >Name: <span class="text-white"  id='name'></span></h2>
+				  	<h5 >Date: <span class="text-white" id='date'></span></h5>
+					<h5 >Network: <span class="text-white" id='network'></span></h5>
+					<h5 >Country: <span class="text-white" id='country'></span></h5>
+				  	<h5 >Status: <span class="text-white"id='status'></span></h5>
+
+
+
+				</div>
+
+				<div class="container col-md-6 d-none d-md-block">
+					<img src="" id='thumb_pc' alt="img" height="250px">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+	
+<script type="text/javascript">
+	
+	document.getElementById('info').style.display = 'none';
+
+
+	const search = () => {
+		document.getElementById('info').style.display = 'none'
+		var series;
+		document.getElementById('spin').style.display = 'block';
+		document.getElementById('search').style.display = 'none';
+		document.getElementById('message').innerHTML = 'Loading...'
+		$.ajax({
+				url : 'https://task4-api.herokuapp.com?',
+				method : 'get',
+				success(response){
+					document.getElementById('spin').style.display = 'none';
+					document.getElementById('search').style.display = 'block';
+					if(response){
+						console.log(response.data.tv_shows.length)
+						series = response.data.tv_shows
+
+						query  = document.getElementById('query').value;
+						query = query.toLowerCase().split(' ').join('-')
+						console.log(query)
+
+						for(var i=0; i< series.length; i+=1){
+							if(series[i].permalink ==  query){
+								document.getElementById('message').innerHTML = ''
+								
+								document.getElementById('info').style.display = 'block';
+								console.log("info")
+								console.log(series[i])
+								document.getElementById('name').innerHTML = series[i].name;
+								document.getElementById('date').innerHTML = series[i].start_date;
+								document.getElementById('country').innerHTML = series[i].country;
+								document.getElementById('network').innerHTML = series[i].network;
+								document.getElementById('status').innerHTML = (series[i].status != 'Ended')? 'Running' : 'Completed'	;
+								document.getElementById('thumb_mobile').src = series[i].image_thumbnail_path
+								document.getElementById('thumb_pc').src = series[i].image_thumbnail_path
+								break;
+							}
+						}
+						
+						if(i==series.length){
+							
+							document.getElementById('message').innerHTML = 'Not Match Found. Try Again.'
+						}
+					}
+					else {
+						console.log('Some Error Occured')
+						document.getElementById('message').innerHTML = 'Some Error Occured'
+					}
+
+
+				}
+			});
+		
+		
+
+	}
+
+	</script>
+
+	<script type="text/javascript">
+		
+	</script>
+</html>
