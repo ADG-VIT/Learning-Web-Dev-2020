@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="task4.css">
+    <title>API</title>
+</head>
+<body>
+    <h1 class="head">Show TV</h1>
+    <p><h2>Everything about your favourites TV shows in one place.</h2></p>
+    <div class="container">
+ 
+    <input class="input" type="text" id='skey'><br>
+    <button class="btn1" id='btn1'>SEARCH</button>
+    <button class="btn2" id="btn2">CLEAR</button>
+
+    </div>
+    
+    <div id="output" class="output" ></div>
+    <div class="footer">
+      <p>Made with <span style="font-size:150%;color:red;">&hearts;</span> || DIVESH ARORA</p>
+
+    </div>
+    
+</body>
+<script>
+  document.getElementById('btn1').addEventListener('click',gettext);
+  document.getElementById('btn2').addEventListener('click',deleteall);
+  document.getElementById('skey').addEventListener('keyup',function(event){
+    if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("btn1").click();
+  }
+  });
+  
+  function gettext(){
+      fetch(" https://task4-api.herokuapp.com/")
+      .then(function(res){
+        return res.json();
+      })
+      .then(function(data){
+          output=""
+            flag=0;
+          var search=document.getElementById('skey').value.toLowerCase();
+          
+          
+          data.data.tv_shows.forEach(p => {
+              if(search.localeCompare(p.name.toLowerCase())==0)
+              {
+              output+=`
+              <div class="container info">      
+              <p>
+                    <img src="${p.image_thumbnail_path}">
+                    <ul>
+
+                    <li>Name: ${p.name}</li>  
+                    <li>Start Date : ${p.start_date}</li>
+                    <li>End Date: ${p.end_date}</li>
+                    <li>Status: ${p.status}</li>
+                    <li>Country: ${p.country}</li>
+                    <li>Network: ${p.network}</li>
+                    </ul>
+                    
+
+                           </p> 
+                           </div>
+              
+          
+              `
+              flag=1;
+              }
+    
+
+              
+          });
+          if(flag==0)
+          {
+
+              output=`<h1 class="nfound">No results found for ${document.getElementById('skey').value} !!<h1>`;
+          }
+          document.getElementById('output').innerHTML=output;
+      })
+    
+  }
+  function deleteall(){
+      document.getElementById('output').innerHTML='';
+      document.getElementById('skey').value='';
+
+  }
+
+    
+</script>
+</html>

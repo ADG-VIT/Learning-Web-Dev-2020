@@ -1,0 +1,104 @@
+body{
+    background: black;
+    color: azure;
+    font-family: 'Montserrat', sans-serif;
+}
+h2{
+    display: flex;
+    justify-content: center;
+}
+.container{
+    
+    padding: 5%;
+    margin: 2%;
+    
+    justify-content: center;
+    
+
+}
+.head{
+    text-align: center;
+    font-family: 'Bangers', cursive;
+    font-size: 300%;
+    letter-spacing: 2px;
+    display: flex;
+    justify-content: center;
+    
+
+}
+.input{
+    border-radius: 10px;
+    width: 30%;
+    padding: 1%;
+    border-color: black;
+    margin-left: 35%;
+    margin-right: 35%;
+    border: transparent;
+}
+.btn1{
+    padding: 1%;
+    width: 20%;
+    border-radius: 10px;
+    background-color: greenyellow;
+    border: transparent;
+    margin: 5%;
+    margin-left: 25%;
+    font-weight: bold;
+}
+.btn2{
+    padding: 1%;
+    width: 20%;
+    border: transparent;
+    border-radius: 10px;
+    background-color: tomato;
+    margin: 5%;
+    font-weight: bold;
+    
+}
+.btn1:hover{
+    cursor: pointer;
+    background-color: seagreen;
+}
+.btn2:hover{
+    cursor: pointer;
+    background-color: red;
+}
+li{
+    list-style-type: none;
+    font-size: 130%;
+    margin: 5px;
+    padding: 1%;
+    
+}
+img{
+    margin:0 5%;
+
+}
+.info{
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+   
+}
+@media screen and (max-width:690px){
+    img{
+        float: none;
+        width: max-content;
+    }
+}
+.nfound{
+    color: red;
+    text-align: center;
+}
+.footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #262626;
+    text-align: center;
+    position: fixed;
+  }
+  .output{
+      margin: 5% 0;
+      
+  }
