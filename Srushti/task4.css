@@ -1,0 +1,66 @@
+body{
+    padding: 5%;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    background-color: black;
+    color: rgb(196, 196, 196);
+  }
+
+.user{
+    display: flex;
+    background:#121212;
+    padding: 3%;
+    text-align: left;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border-radius: 15px;
+    width: 60%;
+    margin: auto;
+  }
+
+  .user ul{
+    list-style: none;
+  }
+  #button{
+    padding:1%;
+    border-radius: 1px;
+    font-size: 17px;
+    border: none;
+    background:#121212;
+    color: white;
+ }
+ #button:hover {
+    background: #0e0e0e;
+  }
+ 
+ #myText{
+    background:#121212;
+    color: rgb(151, 151, 151);
+    border: none;
+    border-radius: 2px;
+    font-size: 17px;
+    padding: 1%;
+ }
+  
+  h1{
+        width:65%;
+        background-color: #121212;
+        border-radius: 15px;
+        padding: 3%;
+        margin: auto;
+  }
+  .users{
+    width:20%;
+    background-color: #121212;
+    color: rgb(151, 151, 151);
+    border-radius: 15px;
+    font-size: 20px;
+    padding: 0.1%;
+    margin: auto;
+}
+  #img{
+      padding: 10%;
+  }
+  #icon{
+      padding-top: 10px;
+  }
