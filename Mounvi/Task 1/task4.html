@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Task-4</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style type="text/css">
+*{
+     margin:0;
+    padding:0;
+}
+body{
+    background-color: black;
+    background-image: linear-gradient(to bottom right,#292B2B, #4D5454);
+}
+h4,h2,h3{
+    color:white;
+}
+footer {
+    position:fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:#C20935;
+  color: white;
+}
+ul{
+    width:200px;
+    display:inline-block;
+}
+input[type=text]{
+margin:20px auto;
+width:700px;
+}
+img{
+    width:180px;
+}
+kbd { 
+    border: 1px solid #FEF8F8;
+    border-radius: 4px;
+    padding: 3px 5px;
+    margin: 2px;
+    color: #FEF8F8;
+    text-decoration: none; 
+}
+.glyphicon-film{
+    color:white;
+}
+</style>
+<body>
+    <div class="container">
+        <div>  
+            <h1 class="text-center"><span class="glyphicon glyphicon-film"></span><kbd>T<small><span style="color:red">v</span></small>S<small><span style=" color:red" >eries</span></small>W<small><span style=" color:red" >ikipedia</span></small></kbd><span class="glyphicon glyphicon-film"></span></h1></div>
+        <h4 class="text-center">Here's the most exciting wikipedia,you can look for any movies and other interesting tv series and know its status</h4>
+    </div>
+    <div class="text-center">
+        <div class=" form-group">
+        <input type="text"  class="form-control input-lg text-center" id='enter' placeholder="Enter to find out the details of your favourite Movies and TVseries!">
+        </div></div>
+        <div class="text-center col-sm-12">
+            <button type="button" class="btn btn-danger" id="search" onclick="loading()"><span class="glyphicon glyphicon-search"></span> Search</button>
+            <button type="button" class="btn btn-info" onclick="clearall()"><span class="glyphicon glyphicon-remove-sign"></span> Clear</button>
+    </div>
+    <div class="text-center" id="display2"></div>
+    <div id="display"></div>
+    <footer class="text-center">-Made by Mounvi.Any queries,contact me at <span class="glyphicon glyphicon-earphone">96XXXXXXX9</span></footer>
+
+
+
+    <script>
+        function loading(){
+            document.getElementById('display2').innerHTML="<h2>Loading,please wait....</h2>";
+        }
+document.getElementById('search').addEventListener('click',fetchalldata);
+  function fetchalldata(){
+      fetch("https://task4-api.herokuapp.com/")
+      .then((res)=>res.json())
+      .then((data)=>{
+          flag=0
+          output=""
+          var Name=document.getElementById('enter').value.toLowerCase();
+          data.data.tv_shows.forEach(function(user) {
+              if(Name.localeCompare(user.name.toLowerCase())==0)
+              {
+                  flag=1;
+                document.getElementById("display2").innerHTML='';
+              output+=`<br><br>
+              <div class="text-center">  
+                <table class="table"><tr><td align="right">    
+                    <img src="${user.image_thumbnail_path}" class="img-thumbnail"></td>
+                    <td align="left"><ul class="list-group ">
+                    <li class="list-group-item">Name: ${user.name}</li> 
+                    <li class="list-group-item">Network: ${user.network}</li> 
+                    <li class="list-group-item">Country: ${user.country}</li>
+                    <li class="list-group-item">Start Date : ${user.start_date}</li>
+                    <li class="list-group-item">End Date: ${user.end_date}</li>
+                    <li class="list-group-item">Status: ${user.status}</li>
+                    </ul></td><tr></table>
+                           </div>`
+              
+              }    
+          });
+          if(flag==0)
+          {
+              document.getElementById("display2").innerHTML="<h2>No results found,Please try again:(</h2>";
+          }
+          document.getElementById('display').innerHTML=output;
+      })
+  }
+        function clearall()
+        {
+            document.getElementById('enter').value='';
+            document.getElementById('display').innerHTML='';
+            document.getElementById('display2').innerHTML='';
+        }
+    </script>
+</body>
