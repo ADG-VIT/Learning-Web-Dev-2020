@@ -17,6 +17,42 @@
 * {
     /*border: 1px dashed green;*/
 }
+
+#home_link {
+	text-decoration: none;
+	text-decoration-style: none;
+}
+
+#title_:hover {
+	cursor: pointer;
+	font-weight: 400;
+}
+
+#title_ span {
+	transition: 0.1s linear;
+}
+
+#title_:hover span:nth-child(1) {
+	margin-right: 0px;
+}
+
+#title_:hover span:nth-child(1):after {
+	content: "-";
+}
+
+#title_:hover span:nth-child(2) {
+	margin-left: 0px;
+}
+
+#title_:hover span{
+	color: #dc3545;
+	text-shadow: 0 0 10px #dc3545,
+0 0 20px #dc3545,
+0 0 30px #dc3545,
+0 0 40px #dc3545,
+0 0 60px #dc3545;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 12px;
@@ -39,11 +75,11 @@
 </style>
 
 <body class="bg-dark p-0">
-    <div class="display-1 text-center text-white">
-        Wiki<span class="text-danger">Flix</span>
-    </div>
+    <a href="#" id = 'home_link'><div class="display-1 text-center text-white" id="title_">
+       <span>Wiki</span><span class="text-danger">Flix</span>
+    </div></a>
     <div class="jumbotron bg-dark text-white my-1">
-        <h1>Wiki<span class="text-danger">Flix</span></h1>
+        <h1><a href="#" id = 'home_link'>Wiki<span class="text-danger">Flix</span></a></h1>
         <p class="bg-light text-dark lead">A tool, to search for your favourite TV Shows, given of course that they are from the given <span class="text-light">inconsistent</span> API at <a href="https://task4-api.herokuapp.com/">"https://task4-api.herokuapp.com/".</a></p>
         <p class="text-warning bg-secondary">The app uses <span class="text-success font-weight-bold">jQuery's "ajax"</span>, to fetch the data from the API, which is then stored in memory.<br>On <span class="text-danger font-weight-bold"> Searching</span>, the app then filters relevant data by linear search and renders by <span class="text-success font-weight-bold"> DOM manipulation</span> with javascript and javascript's jQuery Library.</p>
         <p class="text-warning bg-secondary">I have tried to implement a crucial feature of <span class="text-success font-weight-bold">Autocomplete</span>, which can be used as a simple plugin script into your own code to implement the same.<br><em>Subtle <span class="text-danger font-weight-bold">micro-interaction</span> added to search Button.</em></p>
@@ -89,6 +125,7 @@
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
 document.getElementById('info').style.display = 'none';
 
@@ -99,6 +136,14 @@ const search = () => {
     document.getElementById('spin').style.display = 'block';
     document.getElementById('search').style.display = 'none';
     document.getElementById('message').innerHTML = 'Loading...'
+    const getData = () =>axios.get('https://task4-api.herokuapp.com?').then(
+    	function(response)  {
+    	console.log(response)
+    }).catch(
+    	function(err) {
+    		console.log(err);
+    	});
+    getData();
     $.ajax({
         url: 'https://task4-api.herokuapp.com?',
         method: 'get',
