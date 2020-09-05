@@ -1,4 +1,5 @@
 body {
+    /* overflow: hidden; */
     margin: 0;
     background-color: black; /*#212121*/
     color: #ffffff;
@@ -110,5 +111,19 @@ form:active .fa{
   #SearchResult {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      grid-gap: 1em;
       padding: 10% 25%;
   }
+
+  @media only screen and (max-width:450px) {
+    #SearchResult {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 1em;
+        padding: 5%;
+    }
+  }
+
+h3{
+    text-align-last: center !important;
+}
